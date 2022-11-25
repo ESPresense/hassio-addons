@@ -1,9 +1,9 @@
 name: ESPresense Companion
-version: 0.0.0
+version: 0.0.1
 slug: companion
 description: ESPresense Companion Add On
 url: https://espresense.com/
-image: espresense/espresense
+image: espresense/espresense-companion
 arch:
   - aarch64
   - amd64
