@@ -1,5 +1,5 @@
 name: ESPresense Companion
-version: 0.1.2
+version: 0.1.4
 slug: companion
 description: ESPresense Companion Add On
 url: https://espresense.com/
@@ -15,15 +15,3 @@ ingress: true
 ingress_port: 8267
 panel_icon: mdi:alpha-e-circle
 panel_title: ESPresense
-hassio_api: true
-homeassistant_api: true
-options:
-  log_level: info
-  log_messages: false
-  generate_entities: false
-  app_source: "/config/espresense/apps"
-schema:
-  log_level: match(^(trace|debug|info|warning|error)$)
-  log_messages: bool?
-  generate_entities: bool?
-  app_source: str
