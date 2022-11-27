@@ -15,3 +15,5 @@ ingress: true
 ingress_port: 8267
 panel_icon: mdi:alpha-e-circle
 panel_title: ESPresense
+services:
+  - mqtt:want
