@@ -1,6 +1,6 @@
 # ESPresense add-on repository
 
-This repository can be used as a "blueprint" for add-on development to help you get started.
+This repository contains add-ons to Home Assistant related to ESPresense
 
 Add-on documentation: <https://developers.home-assistant.io/docs/add-ons>
 
