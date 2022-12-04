@@ -1,5 +1,5 @@
 name: ESPresense Companion
-version: 0.1.12
+version: 0.1.13
 slug: espresense-companion
 description: ESPresense Companion Add On
 url: https://espresense.com/
@@ -18,6 +18,5 @@ panel_title: ESPresense
 homeassistant_api: true
 services:
   - mqtt:want
-options: {}
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
