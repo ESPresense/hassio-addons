@@ -12,6 +12,7 @@ arch:
 map:
   - config:rw
 ingress: true
+ingress_stream: true
 ingress_port: 8267
 panel_icon: mdi:alpha-e-circle
 panel_title: ESPresense
