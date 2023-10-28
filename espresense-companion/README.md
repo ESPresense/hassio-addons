@@ -1,6 +1,6 @@
 # ESPresense Companion
 
-This is a companion to ESPresense.  So far it implements an indoor positioning algorithm using the MQTT distances received.  In the future, I plan to implement a way of changing settings/firmware on all ESPresense nodes.
+ESPresense-companion, a Home Assistant Add-on, offers real-time BLE device tracking on a detailed floorplan of your home while providing comprehensive control over your ESPresense nodes.
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
