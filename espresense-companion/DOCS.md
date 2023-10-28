@@ -1,12 +1,6 @@
 # ESPresense Companion
 
-## How to use
+ESPresense-companion, a Home Assistant Add-on, offers real-time BLE device tracking on a detailed floorplan of your home while providing comprehensive control over your ESPresense nodes.
 
-### Setup Mqtt
-
-Mqtt should be auto discovered if you use the mqtt addon.  If not add the mqtt configuration in the mqtt tab.
-
-### Edit Config
-
-Edit the file in /config/espresense/config.yaml.
+See https://espresense.com/companion
 

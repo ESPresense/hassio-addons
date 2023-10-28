@@ -1,8 +1,8 @@
 name: ESPresense Companion
-version: 0.3.40
+version: 0.4.0
 slug: espresense-companion
-description: ESPresense Companion Add On
-url: https://espresense.com/
+description: Home Assistant Add-on for precise BLE device tracking and ESPresense node management on a home floorplan
+url: https://espresense.com/companion
 image: espresense/espresense-companion
 arch:
   - aarch64
@@ -11,13 +11,18 @@ arch:
   - armv7
 map:
   - config:rw
+host_network: true
 ingress: true
-ingress_stream: true
 ingress_port: 8267
+ingress_stream: true
 panel_icon: mdi:alpha-e-circle
 panel_title: ESPresense
 homeassistant_api: true
 services:
   - mqtt:want
-schema:
-  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+ports:
+  8267/tcp: null
+  8268/tcp: null
+ports_description:
+  8267/tcp: UI
+  8268/tcp: Firmware Updates
