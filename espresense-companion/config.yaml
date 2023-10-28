@@ -14,9 +14,14 @@ map:
 ingress: true
 ingress_stream: true
 ingress_port: 8267
+ingress_stream: true
 panel_icon: mdi:alpha-e-circle
 panel_title: ESPresense
 homeassistant_api: true
 services:
   - mqtt:want
 
+ports:
+  8268/tcp: 8268
+ports_description:
+  8268/tcp: Firmare Updater
