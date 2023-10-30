@@ -1,4 +1,7 @@
-<!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
+## 0.4.2
+
+- Less dumb logs @DTTerastar (#364)
+- Close on firmware success @DTTerastar (#363)
 
 ## 0.4.1
 
