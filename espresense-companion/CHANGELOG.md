@@ -1,3 +1,7 @@
+## 0.4.3
+
+- Fixes: config causes a crash #338 @DTTerastar (#370)
+
 ## 0.4.2
 
 - Less dumb logs @DTTerastar (#364)
