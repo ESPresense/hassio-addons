@@ -1,3 +1,7 @@
+## 0.4.4
+
+- Fix issue doing second firmware update @DTTerastar (#382)
+
 ## 0.4.3
 
 - Fixes: config causes a crash #338 @DTTerastar (#370)
