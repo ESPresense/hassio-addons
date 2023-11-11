@@ -1,3 +1,8 @@
+## 0.4.5
+
+- Much faster updating @DTTerastar (#390)
+- Fix showAll @DTTerastar (#388)
+
 ## 0.4.4
 
 - Fix issue doing second firmware update @DTTerastar (#382)
