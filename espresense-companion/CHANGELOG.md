@@ -1,3 +1,7 @@
+## 0.4.6
+
+- Add master builds to artifacts dropdown @DTTerastar (#391)
+
 ## 0.4.5
 
 - Much faster updating @DTTerastar (#390)
