@@ -1,3 +1,7 @@
+## 0.4.7
+
+- Fix issues where devices can get stuck @gunnarbeutner (#392)
+
 ## 0.4.6
 
 - Add master builds to artifacts dropdown @DTTerastar (#391)
