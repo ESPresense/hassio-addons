@@ -1,3 +1,7 @@
+## 0.4.8
+
+- Fix aspect ratio @DTTerastar (#407)
+
 ## 0.4.7
 
 - Fix issues where devices can get stuck @gunnarbeutner (#392)
