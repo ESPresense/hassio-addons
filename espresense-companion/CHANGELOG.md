@@ -1,3 +1,7 @@
+## 0.4.9
+
+- Upgrade to net8 @DTTerastar (#423)
+
 ## 0.4.8
 
 - Fix aspect ratio @DTTerastar (#407)
