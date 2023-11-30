@@ -1,3 +1,7 @@
+## 0.5.0
+
+- Adding tests, move to single connection @DTTerastar (#435)
+
 ## 0.4.9
 
 - Upgrade to net8 @DTTerastar (#423)
