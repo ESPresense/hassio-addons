@@ -1,3 +1,7 @@
+## 0.5.1
+
+- Add variance reporting to calibration screen @DTTerastar (#443)
+
 ## 0.5.0
 
 - Adding tests, move to single connection @DTTerastar (#435)
