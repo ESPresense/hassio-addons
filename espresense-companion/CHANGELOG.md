@@ -1,3 +1,8 @@
+## 0.5.2
+
+- Add variance to radar @DTTerastar (#444)
+- Fix saving empty rssi@1m @DTTerastar (#445)
+
 ## 0.5.1
 
 - Add variance reporting to calibration screen @DTTerastar (#443)
