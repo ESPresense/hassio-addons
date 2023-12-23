@@ -1,3 +1,7 @@
+## 0.6.0
+
+- Websocket updating of devices, radar for nodes, node detail @DTTerastar (#459)
+
 ## 0.5.2
 
 - Add variance to radar @DTTerastar (#444)
