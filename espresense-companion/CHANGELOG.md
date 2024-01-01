@@ -1,3 +1,9 @@
+## 0.6.2
+
+- Rollback Flurl @DTTerastar (#495)
+- Bump @typescript-eslint/parser from 6.15.0 to 6.16.0 in /src/ui @dependabot (#492)
+- Fix supervision mqtt auth @DTTerastar (#494)
+
 ## 0.6.0
 
 - Websocket updating of devices, radar for nodes, node detail @DTTerastar (#459)
