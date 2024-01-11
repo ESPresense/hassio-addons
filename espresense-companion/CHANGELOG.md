@@ -1,3 +1,7 @@
+## 0.6.3
+
+- Fix github artifacts updating @DTTerastar (#513)
+
 ## 0.6.2
 
 - Rollback Flurl @DTTerastar (#495)
