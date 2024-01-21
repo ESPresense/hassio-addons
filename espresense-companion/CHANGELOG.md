@@ -1,3 +1,9 @@
+## 0.6.4
+
+- Npm upgrades @DTTerastar (#532)
+- Bump Serilog.AspNetCore from 8.0.0 to 8.0.1 in /src @dependabot (#530)
+- Bump Flurl.Http from 3.2.4 to 4.0.2 in /src @dependabot (#529)
+
 ## 0.6.3
 
 - Fix github artifacts updating @DTTerastar (#513)
