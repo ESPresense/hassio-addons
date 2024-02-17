@@ -1,3 +1,7 @@
+## 0.6.5
+
+- Fix GaussianWeighting + Refactors @DTTerastar (#568)
+
 ## 0.6.4
 
 - Npm upgrades @DTTerastar (#532)
