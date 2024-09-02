@@ -1,3 +1,9 @@
+## 1.0.0
+
+- Bayesian approach for scenario selection by @DTTerastar in #697
+- Add Kalman Filter by @DTTerastar in #698
+- Fix HASS discovery, set source_type to bluetooth fixes #657 by @DTTerastar in #699
+
 ## 0.6.5
 
 - Fix GaussianWeighting + Refactors @DTTerastar (#568)
