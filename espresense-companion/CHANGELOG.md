@@ -1,3 +1,10 @@
+## 1.0.1
+
+- Load devices from mqtt at startup (fixes #336) @DTTerastar (#749)
+- Add .devcontainer file with DotNet 8.0 and Node 20 @leccelecce (#730)
+- Add IP address column to Nodes table @leccelecce (#729)
+- If mqtt client id contains read don't write to mqtt @DTTerastar (#728)
+
 ## 1.0.0
 
 - Bayesian approach for scenario selection by @DTTerastar in #697
