@@ -1,3 +1,9 @@
+## 1.0.2
+
+- Allow for excluding id patterns @DTTerastar (#751)
+- ShowUntracked checkbox @DTTerastar (#755)
+- UI Improvements @DTTerastar (#752)
+
 ## 1.0.1
 
 - Load devices from mqtt at startup (fixes #336) @DTTerastar (#749)
