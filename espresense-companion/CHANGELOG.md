@@ -1,3 +1,9 @@
+## 1.0.4
+
+- Fix 404 on calibration fixes #585 @DTTerastar (#803)
+- Add NadarayaWatsonMultilateralizer @DTTerastar (#754) (not yet usable tho)
+- Nicer Dockerfile @DTTerastar (#773)
+
 ## 1.0.3
 
 - Fix calibration order, add reset @DTTerastar (#767)
