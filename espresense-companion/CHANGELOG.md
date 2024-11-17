@@ -1,3 +1,9 @@
+## 1.0.5
+
+- Background upload @DTTerastar (#841)
+- Add configurable wall thickness, color, opacity @DTTerastar (#829)
+- Add flipX and flipY config options (fixes #253) @DTTerastar (#830)
+
 ## 1.0.4
 
 - Fix 404 on calibration fixes #585 @DTTerastar (#803)
