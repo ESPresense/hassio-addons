@@ -1,3 +1,7 @@
+## 1.0.8
+
+- Fix coordinates @DTTerastar (#847)
+
 ## 1.0.7
 
 - Add coordinates to map @DTTerastar (#845)
