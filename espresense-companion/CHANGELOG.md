@@ -1,3 +1,7 @@
+## 1.0.7
+
+- Add coordinates to map @DTTerastar (#845)
+
 ## 1.0.6
 
 - Increase zoom range @DTTerastar (#843)
