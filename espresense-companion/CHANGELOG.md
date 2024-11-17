@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Increase zoom range @DTTerastar (#843)
+
 ## 1.0.5
 
 - Background upload @DTTerastar (#841)
