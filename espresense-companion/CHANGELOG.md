@@ -1,3 +1,7 @@
+## 1.0.13
+
+- Minor tweaks to copy coordinates functionality @DTTerastar (#867)
+
 ## 1.0.12
 
 - Cmd-c/Cntrl-c to copy coordinates to clipboard @DTTerastar (#860)
