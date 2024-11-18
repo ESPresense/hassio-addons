@@ -1,3 +1,8 @@
+## 1.0.9
+
+- Fix aspectRatio 1:1 @DTTerastar (#851)
+- Faster build? @DTTerastar (#850)
+
 ## 1.0.8
 
 - Fix coordinates @DTTerastar (#847)
