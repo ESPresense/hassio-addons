@@ -1,3 +1,8 @@
+## 1.0.11
+
+- Fix hovering not working @DTTerastar (#858)
+- Fix bug where +/- reset translation @DTTerastar (#857)
+
 ## 1.0.10
 
 - Add keyboard handling to map w/ shift for precision @DTTerastar (#854)
