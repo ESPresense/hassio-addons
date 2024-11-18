@@ -1,3 +1,8 @@
+## 1.0.10
+
+- Add keyboard handling to map w/ shift for precision @DTTerastar (#854)
+- Smoother mouse wheel zoom when shift held @DTTerastar (#853/#855)
+
 ## 1.0.9
 
 - Fix aspectRatio 1:1 @DTTerastar (#851)
