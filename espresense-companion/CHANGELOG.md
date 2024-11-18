@@ -1,3 +1,7 @@
+## 1.0.12
+
+- Cmd-c/Cntrl-c to copy coordinates to clipboard @DTTerastar (#860)
+
 ## 1.0.11
 
 - Fix hovering not working @DTTerastar (#858)
