@@ -1,3 +1,8 @@
+## 1.0.14
+
+- Locator configuration added @DTTerastar (#794)
+- Fix misc error in MapCoordinates @DTTerastar (#869)
+
 ## 1.0.13
 
 - Minor tweaks to copy coordinates functionality @DTTerastar (#867)
