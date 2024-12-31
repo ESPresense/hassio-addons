@@ -1,3 +1,7 @@
+## 1.0.15
+
+- Add 3d view (#927)
+
 ## 1.0.14
 
 - Locator configuration added @DTTerastar (#794)
