@@ -1,3 +1,7 @@
+## 1.0.16
+
+- Add Auto Update and Allow Prerelease toggles on Nodes page
+
 ## 1.0.15
 
 - Add 3d view (#927)
