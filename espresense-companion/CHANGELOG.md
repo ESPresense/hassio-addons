@@ -1,3 +1,7 @@
+## 1.0.17
+
+- - Add persistent LastSeen value to device @DTTerastar (#1002)
+
 ## 1.0.16
 
 - Add Auto Update and Allow Prerelease toggles on Nodes page
