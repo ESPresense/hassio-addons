@@ -1,6 +1,10 @@
+## 1.0.18
+
+- Add Calibrate Device page, fix titles @DTTerastar (#1011)
+
 ## 1.0.17
 
-- - Add persistent LastSeen value to device @DTTerastar (#1002)
+- Add persistent LastSeen value to device @DTTerastar (#1002)
 
 ## 1.0.16
 
