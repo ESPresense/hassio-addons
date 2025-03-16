@@ -1,6 +1,10 @@
+## 1.0.20
+
+- Fix initization race (fixes #637) @DTTerastar (#1029)
+
 ## 1.0.19
 
-- Fix saving calibration @DTTerastar (#1028) (fixes #1027)
+- Fix saving calibration (fixes #1027) @DTTerastar (#1028)
 
 ## 1.0.18
 
