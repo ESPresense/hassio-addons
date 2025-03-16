@@ -1,3 +1,7 @@
+## 1.0.19
+
+- Fix saving calibration @DTTerastar (#1028) (fixes #1027)
+
 ## 1.0.18
 
 - Add Calibrate Device page, fix titles @DTTerastar (#1011)
