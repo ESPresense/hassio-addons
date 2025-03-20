@@ -1,3 +1,3 @@
 ## latest
 
-This is just whatever is in the latest tag of container
+This is just whatever is in espresense/espresense-companion:beta
