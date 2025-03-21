@@ -1,3 +1,9 @@
+## 1.0.21
+
+- Improvements to optimization matrix @DTTerastar (#1048)
+- Enhancements to firmware updating @DTTerastar (#1038)
+- Improved error handling for configuration retrieval @DTTerastar (#1030)
+
 ## 1.0.20
 
 - Fix initization race (fixes #637) @DTTerastar (#1029)
