@@ -1,3 +1,9 @@
+## 1.0.22
+
+- No https desired (fixes #1050) @DTTerastar (#1058)
+- Fix fixes showing n/a when no scenario @DTTerastar (#1057)
+- Svelte 5 Upgrade @DTTerastar (#1054)
+
 ## 1.0.21
 
 - Improvements to optimization matrix @DTTerastar (#1048)
