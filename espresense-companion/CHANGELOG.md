@@ -1,3 +1,14 @@
+## 1.0.23
+
+This release fixes a bunch of issues w/ the 3d map. It also makes it possible to rotate your house so that latt/long are more accurate. Added a Geolocation view to help setup and align it.
+
+- Use satellite imagery @DTTerastar (#1073)
+- House Orientation for GPS (fixes #925) @DTTerastar (#1072)
+- Fix 3d view origin (fixes #1004) @DTTerastar (#1071)
+- 3d view fix cleanup @DTTerastar (#1070)
+- Load and save name, fix null updating everything @DTTerastar (#1064)
+- Misc rename, and fixes @DTTerastar (#1063)
+
 ## 1.0.22
 
 - No https desired (fixes #1050) @DTTerastar (#1058)
