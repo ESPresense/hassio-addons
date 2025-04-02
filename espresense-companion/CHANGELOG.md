@@ -1,3 +1,9 @@
+## 1.0.24
+
+- Redo the way navigation works/make device and node editing a model dialog @DTTerastar (#1077)
+- Add rotation to config.example @DTTerastar (#1076)
+- Add 3d detail when clicking device @DTTerastar (#1075)
+
 ## 1.0.23
 
 This release fixes a bunch of issues w/ the 3d map. It also makes it possible to rotate your house so that latt/long are more accurate. Added a Geolocation view to help setup and align it.
