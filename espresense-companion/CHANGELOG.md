@@ -1,3 +1,18 @@
+## 2.0.0
+
+This is a big release, config has changed a bunch, check your config vs the example.
+Contains a workaround for a regression in home assistant that stopped mqtt device trackers from showing the room
+Contains Major Overhaul of Auto Optimization
+
+- Fix not\_home update and add regression test @DTTerastar (#1159)
+- Add GPS reporting toggle @DTTerastar (#1158)
+- Fix Nelder-Mead locator naming typo @DTTerastar (#1155)
+- Confidence improvements, now verifies correlation as well as error @DTTerastar (#1135)
+- Major Overhaul of Auto Optimization @DTTerastar (#1121)
+- Tweaks to RMSE and R @DTTerastar (#1113)
+- RMSE and R @DTTerastar (#1111)
+- Add rssi variance @DTTerastar (#1093)
+
 ## 1.0.24
 
 - Redo the way navigation works/make device and node editing a model dialog @DTTerastar (#1077)
