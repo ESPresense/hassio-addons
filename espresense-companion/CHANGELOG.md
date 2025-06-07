@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Work around Couldn't find a valid ICU package (#1168)
+
 ## 2.0.0
 
 This is a big release, config has changed a bunch, check your config vs the example.
