@@ -1,5 +1,5 @@
 name: ESPresense Companion
-version: 2.0.1
+version: 2.0.2
 slug: espresense-companion
 description: Home Assistant Add-on for precise BLE device tracking and ESPresense node management on a home floorplan
 url: https://espresense.com/companion

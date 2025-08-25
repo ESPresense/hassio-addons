@@ -1,3 +1,16 @@
+## 2.0.2
+
+- fix: sort devices by last seen timestamp @DTTerastar (#1229)
+- feat(ui): use floating-ui tooltips on calibration page @DTTerastar (#1231)
+- Refactor UpdateLocation method to remove confidence parameter @DTTerastar (#1230)
+- ci: run frontend tests @DTTerastar (#1226)
+- Upgrade LayerCake to v10 @DTTerastar (#1225)
+- Make 3D view snazzy @DTTerastar (#1212)
+- Remove svelte-table dep @DTTerastar (#1211)
+- feat: render nodes with 3D logo model @DTTerastar (#1209)
+- Improve firmware update UI @DTTerastar (#1189)
+- Delete old nodes @DTTerastar (#1176)
+
 ## 2.0.1
 
 - Work around Couldn't find a valid ICU package (#1168)
