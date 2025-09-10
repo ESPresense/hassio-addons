@@ -1,3 +1,7 @@
+## 2.0.3
+
+- UI upgraded to skeleton v3
+
 ## 2.0.2
 
 - fix: sort devices by last seen timestamp @DTTerastar (#1229)
