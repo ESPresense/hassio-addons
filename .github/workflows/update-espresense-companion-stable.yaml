@@ -1,0 +1,135 @@
+name: Update ESPresense Companion Stable
+
+on:
+  schedule:
+    - cron: '22 4 * * 1,4'          # twice a week (Mon & Thu at 4:22 UTC)
+  workflow_dispatch:                # allow manual trigger
+
+jobs:
+  update-stable:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install yq
+        run: |
+          sudo snap install yq
+
+      - name: Get latest stable release
+        id: get-version
+        run: |
+          RELEASE_JSON=$(curl -s \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/ESPresense/ESPresense-companion/releases)
+
+          LATEST=$(echo "$RELEASE_JSON" | jq -r '[.[] | select(.prerelease == false and .draft == false)] | .[0].tag_name')
+
+          if [[ -z "$LATEST" || "$LATEST" == "null" ]]; then
+            echo "Failed to find latest stable release"
+            exit 1
+          fi
+
+          CLEAN_VERSION=$(echo "$LATEST" | sed 's/^v//')
+          RELEASE_NOTES=$(echo "$RELEASE_JSON" | jq -r "[.[] | select(.prerelease == false and .draft == false)] | .[0].body")
+
+          echo "version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
+          # Save release notes to a file, removing "## What's Changed" line
+          echo "$RELEASE_NOTES" | sed '/^## What'"'"'s Changed$/d' > /tmp/release_notes.txt
+
+      - name: Update config.yaml (stable)
+        env:
+          NEW_VERSION: ${{ steps.get-version.outputs.version }}
+        run: |
+          cd espresense-companion  # ← adjust folder name if different
+
+          CURRENT=$(yq '.version' config.yaml)
+
+          if [[ "$CURRENT" == "$NEW_VERSION" ]]; then
+            echo "Already up to date ($NEW_VERSION)"
+            exit 0
+          fi
+
+          echo "Updating from $CURRENT → $NEW_VERSION"
+
+          yq -i ".version = \"$NEW_VERSION\"" config.yaml
+
+          # Update CHANGELOG.md
+          if [ -f CHANGELOG.md ]; then
+            # Add new version entry with release notes at the top
+            {
+              echo "## $NEW_VERSION"
+              echo ""
+              cat /tmp/release_notes.txt
+              echo ""
+              cat CHANGELOG.md
+            } > CHANGELOG.md.tmp
+            mv CHANGELOG.md.tmp CHANGELOG.md
+          fi
+
+      - name: Test container startup
+        env:
+          IMAGE_TAG: ${{ steps.get-version.outputs.version }}
+        run: |
+          docker pull espresense/espresense-companion:${{ env.IMAGE_TAG }}
+
+          # Start MQTT broker
+          docker run -d --name mqtt-test -p 1883:1883 eclipse-mosquitto:latest
+
+          # Create config directory structure
+          mkdir -p test-config/espresense
+          cat > test-config/espresense/config.yaml <<EOF
+          mqtt:
+            host: localhost
+            port: 1883
+          EOF
+
+          docker run -d --name esp-test \
+            --network host \
+            -v $(pwd)/test-config:/config \
+            espresense/espresense-companion:${{ env.IMAGE_TAG }}
+
+          # Wait a moment for container to start
+          sleep 3
+
+          # Check if container is still running
+          if ! docker ps | grep -q esp-test; then
+            echo "Container crashed immediately!"
+            docker logs esp-test 2>&1 || echo "No logs available"
+            docker rm esp-test || true
+            docker stop mqtt-test || true
+            exit 1
+          fi
+
+          # Wait for app to fully start
+          sleep 15
+
+          if curl --fail --silent http://localhost:8267 >/dev/null; then
+            echo "Web UI responded → container looks healthy"
+            docker stop esp-test
+            docker rm esp-test
+            docker stop mqtt-test
+          else
+            echo "Web UI did NOT respond"
+            docker logs esp-test || true
+            docker stop esp-test || true
+            docker rm esp-test || true
+            docker stop mqtt-test || true
+            exit 1
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "actions@github.com"
+
+          git add espresense-companion/config.yaml
+          git add espresense-companion/CHANGELOG.md
+          git commit -m "chore: update stable to ${{ steps.get-version.outputs.version }}" || echo "No changes to commit"
+
+          # Pull with rebase in case other workflow pushed changes
+          git pull --rebase origin main || true
+          git push

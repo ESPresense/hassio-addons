@@ -1,0 +1,134 @@
+name: Update ESPresense Companion Beta
+
+on:
+  schedule:
+    - cron: '38 3 * * *'            # every day at 3:38 UTC
+  workflow_dispatch:
+
+jobs:
+  update-beta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install yq
+        run: sudo snap install yq
+
+      - name: Get latest release (beta or stable)
+        id: get-version
+        run: |
+          RELEASE_JSON=$(curl -s \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/ESPresense/ESPresense-companion/releases)
+
+          # Get the latest release regardless of pre-release status
+          LATEST=$(echo "$RELEASE_JSON" | jq -r '[.[] | select(.draft == false)] | .[0].tag_name')
+
+          if [[ -z "$LATEST" || "$LATEST" == "null" ]]; then
+            echo "No release found"
+            exit 0
+          fi
+
+          CLEAN_VERSION=$(echo "$LATEST" | sed 's/^v//')
+          RELEASE_NOTES=$(echo "$RELEASE_JSON" | jq -r '[.[] | select(.draft == false)] | .[0].body')
+
+          echo "version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
+          # Save release notes to a file, removing "## What's Changed" line
+          echo "$RELEASE_NOTES" | sed '/^## What'"'"'s Changed$/d' > /tmp/release_notes.txt
+
+      - name: Update config.yaml (beta)
+        env:
+          NEW_VERSION: ${{ steps.get-version.outputs.version }}
+        run: |
+          cd espresense-companion-beta  # ← adjust folder name if different
+
+          CURRENT=$(yq '.version' config.yaml)
+
+          if [[ "$CURRENT" == "$NEW_VERSION" ]]; then
+            echo "Beta already up to date ($NEW_VERSION)"
+            exit 0
+          fi
+
+          echo "Updating beta from $CURRENT → $NEW_VERSION"
+
+          yq -i ".version = \"$NEW_VERSION\"" config.yaml
+
+          # Update CHANGELOG.md
+          if [ -f CHANGELOG.md ]; then
+            # Add new version entry with release notes at the top
+            {
+              echo "## $NEW_VERSION"
+              echo ""
+              cat /tmp/release_notes.txt
+              echo ""
+              cat CHANGELOG.md
+            } > CHANGELOG.md.tmp
+            mv CHANGELOG.md.tmp CHANGELOG.md
+          fi
+
+      - name: Test beta container
+        env:
+          IMAGE_TAG: ${{ steps.get-version.outputs.version }}
+        run: |
+          docker pull espresense/espresense-companion:${{ env.IMAGE_TAG }}
+
+          # Start MQTT broker
+          docker run -d --name mqtt-beta-test -p 1883:1883 eclipse-mosquitto:latest
+
+          # Create config directory structure
+          mkdir -p test-config/espresense
+          cat > test-config/espresense/config.yaml <<EOF
+          mqtt:
+            host: localhost
+            port: 1883
+          EOF
+
+          docker run -d --name esp-beta-test \
+            --network host \
+            -v $(pwd)/test-config:/config \
+            espresense/espresense-companion:${{ env.IMAGE_TAG }}
+
+          sleep 20
+
+          # Check if container is still running
+          if ! docker ps | grep -q esp-beta-test; then
+            echo "Container crashed immediately!"
+            docker logs esp-beta-test 2>&1 || echo "No logs available"
+            docker rm esp-beta-test || true
+            docker stop mqtt-beta-test || true
+            exit 1
+          fi
+
+          # Wait for app to fully start
+          sleep 17
+
+          if curl --fail --silent http://localhost:8267 >/dev/null; then
+            echo "Beta web UI responded"
+            docker stop esp-beta-test
+            docker rm esp-beta-test
+            docker stop mqtt-beta-test
+          else
+            echo "Beta failed to serve UI"
+            docker logs esp-beta-test || true
+            docker stop esp-beta-test || true
+            docker rm esp-beta-test || true
+            docker stop mqtt-beta-test || true
+            exit 1
+          fi
+
+      - name: Commit and push beta changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "actions@github.com"
+
+          git add espresense-companion-beta/config.yaml
+          git add espresense-companion-beta/CHANGELOG.md
+          git commit -m "chore: update beta to ${{ steps.get-version.outputs.version }}" || echo "No changes"
+
+          # Pull with rebase in case other workflow pushed changes
+          git pull --rebase origin main || true
+          git push
