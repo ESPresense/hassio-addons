@@ -1,3 +1,17 @@
+## 2.1.2
+
+## What's Changed
+* Fix MQTT connection failures with older brokers by @sensiebot[bot] in https://github.com/ESPresense/ESPresense-companion/pull/1449
+
+## Chores
+* feat: add release dispatch workflow by @DTTerastar in https://github.com/ESPresense/ESPresense-companion/pull/1446
+* feat: add PR labeler Action and include common branch prefixes by @DTTerastar in https://github.com/ESPresense/ESPresense-companion/pull/1448
+
+## New Contributors
+* @sensiebot[bot] made their first contribution in https://github.com/ESPresense/ESPresense-companion/pull/1449
+
+**Full Changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.1.1...v2.1.2
+
 ## 2.1.1
 
 - test: add comprehensive tests for tooltip action @DTTerastar (#1440)

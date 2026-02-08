@@ -1,5 +1,5 @@
 name: ESPresense Companion - BETA
-version: 2.1.1
+version: 2.1.2
 slug: espresense-companion-beta
 description: (BETA) Home Assistant Add-on for precise BLE device tracking and ESPresense node management on a home floorplan
 url: https://espresense.com/companion
