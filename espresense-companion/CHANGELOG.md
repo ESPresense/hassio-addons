@@ -1,3 +1,16 @@
+## 2.2.1
+
+Maintenance release. **No runtime changes** — the companion behaves exactly as v2.2.0.
+
+**Upgrading from 2.1.2?** Read the [v2.2.0 notes](https://github.com/ESPresense/ESPresense-companion/releases/tag/v2.2.0) first — that release changed how confidence and locator error are calculated, and made device `id:`/`name:` globs case-insensitive.
+
+## Fixes
+
+- **Docs**: `config.example.yaml` documented the `exponential` weighting `lambda` default as 3.0; the code default has been 1.5 since #1461. Comment now matches the code (#1661)
+- **Release automation**: release events dispatched to `ESPresense/hass-addons`, which does not exist — the repo is `ESPresense/hassio-addons`. Every published release silently failed that step, so the Home Assistant add-on version was only ever bumped by the twice-weekly cron instead of at release time (#1660)
+
+**Full changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.2.0...v2.2.1
+
 ## 2.2.0
 
 First release since v2.1.2 (Feb 2026) — 165 commits. Please read the top section before upgrading.
