@@ -1,3 +1,46 @@
+## 2.2.0
+
+First release since v2.1.2 (Feb 2026) — 165 commits. Please read the top section before upgrading.
+
+## ⚠️ Behavior changes to check before you upgrade
+
+**Confidence values are calculated differently** (#1445)
+All multilateralizers now share one confidence formula, built from normalized error, the Pearson correlation of measured vs. predicted distances, and how many of a floor's nodes are actually reporting. The numbers will not line up with 2.1.2. If you have Home Assistant automations or templates keyed on a confidence threshold, re-check those thresholds after upgrading.
+
+**Locator error is now a normalized MSE** (#1445)
+The objective changed from a weighted average of squared errors to a weight-normalized mean (`Σ wᵢeᵢ² / Σ wᵢ`). Reported `error` is on a different scale than 2.1.2, and solved positions can shift slightly — most visibly in setups where node weights are uneven.
+
+**Device `id:` / `name:` globs are now case-insensitive** (#1659)
+`devices:` and `exclude_devices:` patterns used to match case-sensitively while the rest of the pipeline matched case-insensitively. A pattern written in the wrong case did nothing before and takes effect now: an `exclude_devices:` entry may start excluding devices you were tracking, and a `devices:` entry may start tracking new ones. Worth a scan of your patterns before upgrading.
+
+**New warnings for node `z` outside floor bounds** (#1635)
+Node coordinates are absolute, but the docs used to say "within room", so a lot of configs have floor-relative `z`. Those nodes were **already** being silently dropped from locating on those floors — 2.2.0 just logs a warning at config load naming each one. No behavior change; you may simply find out that a node was never contributing. Fix by adding the floor's base elevation to `z`.
+
+**`exponential` weighting default `lambda` is now 1.5** (#1461), down from 3.0. Only affects you if you set `algorithm: exponential`. Note `config.example.yaml` still documents 3.0 — the code is authoritative.
+
+## New — all opt-in, off by default
+
+- BFGS, MLE and multi-floor multilateralizers, `enabled: false` by default (#1452, #1445)
+- Device capture recording with ground-truth markers for accuracy analysis (#1592)
+- MCP node management and firmware update jobs (#1465) — this one writes to your nodes; try it on a single node first
+- Calibration slider, and calibration table values rounded to 1 decimal (#1406, #1581)
+- Multilateration simulation harness and an `ILocate` stdin/stdout JSON CLI (#1451, #1541, #1582)
+
+## Fixes
+
+- Host crash when MQTT disconnects during lease release (#1535)
+- MQTT DNS failures no longer take the process down (#1483)
+- `isAnchored` robustness in room floor display (#1391)
+- Firmware artifacts now served from espresense.com (#1532)
+- Measurement count added to the optimization warning (#1462)
+
+## Under the hood
+
+- UI moved to Skeleton v5 (#1642) — restyled, no functional change
+- ~140 dependency updates
+
+**Full changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.1.2...v2.2.0
+
 ## 2.1.2
 
 ## What's Changed
