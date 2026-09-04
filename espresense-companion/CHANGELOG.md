@@ -1,3 +1,18 @@
+## 2.2.2
+
+## Fixes
+
+- **Calibration page no longer crashes the UI** (#1670, fixes #1664) — `crypto.randomUUID` is secure-context-gated and is missing in the insecure/older WebView contexts some Home Assistant installs run under. The tooltip action called it while attaching, so opening **Calibration** threw `crypto.randomUUID is not a function` and every other button in the companion stopped working until you reloaded. Tooltip ids now come from a plain counter. If you hit this on 2.2.1, this is your fix.
+- **HA discovery now uses `availability_topic`** (#1663) — the MQTT LWT was being ignored, so entities didn't go unavailable when the companion dropped off.
+- **`device_tracker` state topic is retained again, and cleared on delete** (#1634) — trackers survive a broker/HA restart instead of coming back blank.
+
+## Internal
+
+- Release dispatch waits for the Docker image to actually exist before firing (#1662), so the HA add-on update no longer races the image build.
+- 12 dependency bumps (#1650, #1651, #1653, #1654, #1655, #1656, #1657, #1665, #1666, #1667, #1668, #1669).
+
+**Full changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.2.1...v2.2.2
+
 ## 2.2.1
 
 Maintenance release. **No runtime changes** — the companion behaves exactly as v2.2.0.
