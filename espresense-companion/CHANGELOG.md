@@ -1,3 +1,13 @@
+## 2.3.1
+
+## Fixes
+
+- **UI stuck on the previous version after an add-on update** (#1733). The web UI shell was served without `Cache-Control`, so browsers (including the Home Assistant ingress frame) kept loading a cached `index.html` and the old bundle long after the container had updated. The shell is now cached for one minute and then revalidated, hashed assets are marked immutable, and the UI does a full page load on its next navigation once it sees a newer build.
+
+### After this update
+
+Browsers that cached the old shell under the previous policy will not contact the server until that cache expires. Do a hard reload of the Companion page once (right-click the frame → Reload frame, or Ctrl/Cmd+Shift+R while it has focus). From then on updates are picked up automatically.
+
 ## 2.3.0
 
 ## Highlights
