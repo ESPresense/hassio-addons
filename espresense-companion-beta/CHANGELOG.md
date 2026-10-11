@@ -1,3 +1,33 @@
+## 2.3.0
+
+## Highlights
+
+- **Find any device.** Filter box on the Devices and Nodes tables; multiple words AND together, matches id, name, room and floor (#1731)
+- **Anchor any device.** The calibration page now places the draggable spot at the floor centre for a device that has never been located, so untracked devices can be anchored (#1732)
+- **Firmware updates that work.** Firmware listings come from espresense.com instead of the rate-limited GitHub API (#1725); the version picker no longer spins forever (#1722); node `update_error` is surfaced in node state and the UI (#1729); the MCP server can install firmware releases and PR builds, and stuck OTA jobs are fixed (#1726)
+- **Node list shows each node's board** (#1727)
+- **Configurable TLS certificate validation** for MQTT brokers with self-signed certs (#1686, thanks @theo416)
+
+## Fixes
+
+- MQTT password no longer leaks through the config API; all async event handlers are awaited (#1721)
+- `exclude_devices` is now honoured on the autodiscovery path, so excluded devices stop resurrecting on restart (#1716)
+- NaN guards in confidence, correlation and absorption math; settings-store round-trip gaps closed (#1699)
+- Nodes with no floors assigned no longer break the map (#1714)
+- Phase-0 bug fixes from the architecture assessment (#1692)
+
+## Under the hood
+
+- Frontend migrated to Svelte 5 runes (#1701)
+- Typed `apiFetch` client, svelte-check at zero errors, lint/check/unit tests gated in CI (#1700, #1694, #1693)
+- AutoMapper, dead optimizers and the frontend-test MSBuild hook removed (#1695)
+- Docker image and devcontainer on Node 22 (#1723, #1728)
+- Dependency bumps (dependabot)
+
+## Known issues
+
+- Firmware v5.0.0b0 nodes updating from GitHub release URLs can fail on the redirect; fixed in firmware v5.0.0b1
+
 ## 2.2.2
 
 ## Fixes
