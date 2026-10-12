@@ -1,3 +1,10 @@
+## 2.3.2
+
+
+- fix(mqtt): retain companion `online` status so device trackers no longer stay `unavailable` after a Home Assistant restart (#1685) @YipYipYAML @DTTerastar (#1734)
+
+**Full Changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.3.1...v2.3.2
+
 ## 2.3.1
 
 ## Fixes
