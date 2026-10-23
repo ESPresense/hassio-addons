@@ -1,3 +1,46 @@
+## 2.4.0
+
+## ⚠️ Breaking change: MQTT TLS certificates are now validated
+
+With `ssl: true`, the broker's certificate is now checked by default (#1735). Setups that relied on a self-signed certificate used to connect and will now **fail to connect** until you configure one of:
+
+| Setting | Behavior |
+|---|---|
+| nothing | Certificate must be trusted by the system CA store (e.g. Let's Encrypt). A failure logs how to fix it |
+| `mqtt.ca_cert_path` | Certificate must chain to that CA |
+| `mqtt.insecure: true` | Certificate is not checked (logs a warning) |
+
+## Also in this release
+- **Calibration:** continuous calibration now converges and `per_node_absorption` works (#1752, #1739, #1759).
+- **MQTT:** read-only clients no longer register a last will (#1736).
+- **UI:** Google Maps-style zoom on the map (#1762), coordinate readout fix (#1764).
+- **Config:** corrected example floorplan (#1754).
+
+## What’s Changed
+
+- Add favicon for Paseo workspace icon @DTTerastar (#1768)
+- fix(calibration): send 0 as 0; reset calibration with empty payloads @DTTerastar (#1765)
+- fix(ui): map coordinate readout/copy offset by the padding since layercake 11 @DTTerastar (#1764)
+- fix(config): correct the example floorplan from the robot's LiDAR map @DTTerastar (#1754)
+- fix(ui): Google Maps-style map zoom (scroll/pinch, Shift+drag box zoom) @DTTerastar (#1762)
+- build(deps-dev): Bump layercake from 10.0.3 to 11.0.0 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1746)
+- build(deps): Bump the npm\_and\_yarn group across 1 directory with 3 updates @[dependabot[bot]](https://github.com/apps/dependabot) (#1760)
+- build(deps-dev): Bump prettier from 3.9.6 to 3.9.10 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1744)
+- build(deps-dev): Bump eslint-plugin-playwright from 2.12.0 to 2.12.1 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1743)
+- Read-only MQTT client: skip the last will, document it in BUILDING.md @DTTerastar (#1736)
+- build(deps-dev): Bump vite-plugin-devtools-json from 1.1.0 to 1.1.1 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1748)
+- build(deps-dev): Bump svelte-check from 4.7.4 to 4.7.6 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1745)
+- Bump Microsoft.AspNetCore.SpaProxy from 8.0.31 to 8.0.32 @[dependabot[bot]](https://github.com/apps/dependabot) (#1747)
+- Bump Swashbuckle.AspNetCore from 10.2.3 to 10.3.1 @[dependabot[bot]](https://github.com/apps/dependabot) (#1757)
+- fix(optimizers): per-node fit error and a warning when a value lands on a limit @DTTerastar (#1759)
+- fix(optimizers): make continuous calibration converge, and make per\_node\_absorption work @DTTerastar (#1752)
+- fix(sim): carry the device at a real height; add plug-height scenario @DTTerastar (#1751)
+- test: bundle the anonymised robot survey so survey tests always run @DTTerastar (#1750)
+- test: synthetic stationary recording and bruno node id @DTTerastar (#1741)
+- fix: GaussNewton minimisation and the calibration acceptance gate @DTTerastar (#1739)
+- Add capture replay scorer to the simulation harness @DTTerastar (#1595)
+- feat(mqtt)!: validate the broker's TLS certificate by default @DTTerastar (#1735)
+
 ## 2.3.2
 
 
