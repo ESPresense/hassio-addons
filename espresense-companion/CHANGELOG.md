@@ -1,3 +1,10 @@
+## 2.4.1
+
+## What’s Changed
+
+- fix(config): nook south wall on the LiDAR line @DTTerastar (#1770)
+- feat(calibration): read v5 reports (rawRssi) and v5's rx\_offset\_rssi @DTTerastar (#1769)
+
 ## 2.4.0
 
 ## ⚠️ Breaking change: MQTT TLS certificates are now validated
