@@ -1,3 +1,30 @@
+## 2.5.0
+
+## What’s Changed
+
+- feat(ui): Ctrl+K finder for everything (devices and nodes, tracked or not) @DTTerastar (#1773)
+- build(deps-dev): Bump eslint from 10.12.0 to 10.13.0 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1779)
+- build(ui): finish the SvelteKit 3 migration with sv migrate @DTTerastar (#1799)
+- Bump ModelContextProtocol.AspNetCore from 2.2.0 to 2.3.0 @[dependabot[bot]](https://github.com/apps/dependabot) (#1784)
+- ci: run Build and test on pushes to main @DTTerastar (#1798)
+- build(deps): Bump paulhatch/semantic-version from 6.0.4 to 6.0.5 @[dependabot[bot]](https://github.com/apps/dependabot) (#1777)
+- fix(ui): annotate node page props so svelte-check passes @DTTerastar (#1797)
+- fix(devices): remove stale HA entities when a device's id alias changes (#1788) @DTTerastar (#1791)
+- Bump Microsoft.AspNetCore.SpaProxy from 8.0.32 to 8.0.33 @[dependabot[bot]](https://github.com/apps/dependabot) (#1783)
+- fix(locators): MultiFloor devices get a floor, so they show on the 2D map (#1605) @DTTerastar (#1787)
+- build(deps-dev): Bump svelte-check from 4.7.6 to 4.7.7 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1781)
+- build(deps-dev): Bump eslint-plugin-svelte from 3.23.0 to 3.23.1 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1782)
+- Bump Polly from 8.8.0 to 8.8.1 @[dependabot[bot]](https://github.com/apps/dependabot) (#1785)
+- build(deps-dev): Bump svelte from 5.57.1 to 5.57.3 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1780)
+- build(ui): upgrade to SvelteKit 3 and Vite 8 (supersedes #1793) @DTTerastar (#1796)
+- fix(locators): treat nearest\_node.max\_distance \<= 0 as no limit @DTTerastar (#1792)
+- fix(config): make history.path and nearest\_node.max\_distance work; drop dead keys (#1767) @DTTerastar (#1786)
+- fix(cleanup): expire devices restored from discovery without a retained last\_seen (#1789) @DTTerastar (#1790)
+- refactor(mqtt): harden MqttCoordinator connect/reconnect and add mqtt.read\_only @DTTerastar (#1697)
+- fix(dev): add ./watch so hot reload stops breaking the UI @DTTerastar (#1776)
+- fix(ui): apply map.flip\_x / flip\_y to the 3D view (#1758) @DTTerastar (#1774)
+- fix(mqtt): anchored devices report their anchor room, not not\_home @DTTerastar (#1761)
+
 ## 2.4.1
 
 ## What’s Changed
