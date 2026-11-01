@@ -1,3 +1,11 @@
+## 2.6.2
+
+## Fix
+
+- **Devices start at 0,0,0 after a restart**: with `multi_floor` enabled, a device's first position was solved from the map origin, and it then slid slowly to its real location. Devices now appear in the right place straight away (#1812).
+
+**Full Changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.6.1...v2.6.2
+
 ## 2.6.1
 
 ## Fix
