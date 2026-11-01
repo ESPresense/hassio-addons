@@ -1,3 +1,28 @@
+## 2.6.0
+
+## Explainable positioning
+
+Every device page now shows how its position was worked out (#1794).
+
+- **Explain this fix** replaces the Details panel. It shows which nodes heard the device, how each locator did, and the floor and room decision, with plain-language hints about what looks wrong.
+- **On the map:** an uncertainty ellipse around the fix, a ring per node, and which nodes agreed or were rejected. Node pages draw their links, measured against the map.
+- **API:** `GET /api/device/{id}/explain` returns the same trace.
+
+The new panel doesn't show some solver diagnostics from Details, such as iterations, Pearson correlation and exit reason. `GET /api/device/{id}` still returns the old list, and #1809 tracks an expert mode for them.
+
+## Fixes
+
+- MultiFloor no longer reports a fix from a single node. (#1807)
+- NearestNode picks the floor from the node's position. (#1805)
+- Dropped the false "z outside floor" warning on nodes. (#1806)
+
+## Maintenance
+
+- The example config uses `multi_floor` and the robot-survey map fixes. (#1803)
+- Pull requests are auto-assigned. (#1808)
+
+**Full changelog:** https://github.com/ESPresense/ESPresense-companion/compare/v2.5.0...v2.6.0
+
 ## 2.5.0
 
 ## What’s Changed
