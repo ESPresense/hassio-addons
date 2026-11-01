@@ -1,3 +1,11 @@
+## 2.6.1
+
+## Fix
+
+- **Device page stuck on "Loading..."**: the Explain this fix panel from v2.6.0 failed for devices on a floor with no other room, such as a single-room floor. It now loads normally (#1810).
+
+**Full Changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.6.0...v2.6.1
+
 ## 2.6.0
 
 ## Explainable positioning
