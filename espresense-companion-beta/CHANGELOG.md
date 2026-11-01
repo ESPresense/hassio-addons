@@ -1,3 +1,26 @@
+## 2.6.3
+
+## Auto optimization
+
+- **Proposals are validated on newer data**: auto optimization now fits on older snapshots and only applies a proposal if it also beats the current calibration on a newer holdout it never saw. Sampling, the training window and the optimization cadence now run on separate clocks (#1624).
+- **Optimizer progress in the calibration view**: it now shows phase, snapshot and sample counts, last outcome, next run and lease holder, plus current and best-seen RMSE and correlation (#1624).
+
+### Upgrade notes
+
+- Companion now takes an optimization snapshot every 30 s, whatever `interval_secs` says. Snapshots stay in memory, so there are no extra database writes, but expect more memory and CPU during cycles.
+- Each cycle fits and scores far more data: `training_window_mins` defaults to 30 minutes, or falls back to `keep_snapshot_mins` if that's set.
+- `interval_secs` now only sets how often proposals are evaluated. Installs that don't set it go from 60 s to 15 minutes.
+- Nothing is applied until the history covers half the training window.
+- New optional keys: `sample_interval_secs`, `training_window_mins`, `optimization_interval_secs`, `validation_fraction` and `minimum_improvement`.
+
+## Fixes
+
+- **Device processing no longer repeats per node**: a device heard by several nodes used to be located once per message. It's now located at most once per pass, using all its current readings (#1698).
+- **Clearing a retained discovery message now removes the device**: it previously removed nothing and logged `Device not found for deletion: (null)` (#1698).
+- **Anchored devices keep their height on the calibration page**: `rssi@1m` was calculated at the default 1.0 m, and re-anchoring moved the device to that height (#1811).
+
+**Full Changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.6.2...v2.6.3
+
 ## 2.6.2
 
 ## Fix
