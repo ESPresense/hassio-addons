@@ -1,3 +1,19 @@
+## 2.6.4
+
+## What’s Changed
+
+- refactor: single CalibrationService for REST and MCP, typed matrix cells (#1842) @DTTerastar (#1849)
+- ci: "Code owner approval" status, so a code owner's own PRs don't need a second reviewer @DTTerastar (#1835)
+- build(ui): point the dev server at any companion for a "companion preview" @DTTerastar (#1834)
+- feat(ui): node-link overlay on the map, coloured by measured vs real distance (#1829) @DTTerastar (#1833)
+- refactor(ConfigLoader): stop ConfigAsync spinning, isolate subscribers, load in StartAsync @DTTerastar (#1696)
+- fix(spa): deep links no longer render a blank page (#1815) @DTTerastar (#1831)
+- build(deps-dev): bump the npm-minor-and-patch group across 1 directory with 15 updates @[dependabot[bot]](https://github.com/apps/dependabot) (#1825)
+- build(deps-dev): bump the three group in /src/ui with 2 updates @[dependabot[bot]](https://github.com/apps/dependabot) (#1824)
+- ci(dependabot): group npm minor and patch updates @DTTerastar (#1823)
+- Bump Polly from 8.8.1 to 8.9.0 @[dependabot[bot]](https://github.com/apps/dependabot) (#1820)
+- build(deps-dev): Bump @types/d3-zoom from 3.0.8 to 3.0.9 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1821)
+
 ## 2.6.3
 
 ## Auto optimization
