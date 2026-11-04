@@ -1,18 +1,42 @@
 ## 2.6.4
 
-## What’s Changed
+## 🕸️ See your whole node mesh at a glance
 
-- refactor: single CalibrationService for REST and MCP, typed matrix cells (#1842) @DTTerastar (#1849)
-- ci: "Code owner approval" status, so a code owner's own PRs don't need a second reviewer @DTTerastar (#1835)
-- build(ui): point the dev server at any companion for a "companion preview" @DTTerastar (#1834)
-- feat(ui): node-link overlay on the map, coloured by measured vs real distance (#1829) @DTTerastar (#1833)
-- refactor(ConfigLoader): stop ConfigAsync spinning, isolate subscribers, load in StartAsync @DTTerastar (#1696)
-- fix(spa): deep links no longer render a blank page (#1815) @DTTerastar (#1831)
-- build(deps-dev): bump the npm-minor-and-patch group across 1 directory with 15 updates @[dependabot[bot]](https://github.com/apps/dependabot) (#1825)
-- build(deps-dev): bump the three group in /src/ui with 2 updates @[dependabot[bot]](https://github.com/apps/dependabot) (#1824)
-- ci(dependabot): group npm minor and patch updates @DTTerastar (#1823)
-- Bump Polly from 8.8.1 to 8.9.0 @[dependabot[bot]](https://github.com/apps/dependabot) (#1820)
-- build(deps-dev): Bump @types/d3-zoom from 3.0.8 to 3.0.9 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1821)
+The map has a new **Node links** toggle (bottom right). It draws a line between every pair of placed nodes that can hear each other, coloured by how well each link's measured distance matches the real one:
+
+- 🔵 **blue**: measures short
+- 🟢 **green**: about right
+- 🔴 **red**: measures long
+
+A node that's off on every link, or a wall that makes every link through it read long, now shows up immediately, without opening nodes one at a time. A few details:
+
+- Anchored devices show up as dashed lines, so you can see how well each node hears a device at a known spot.
+- Use **Nearest** (2/3/4/6/All) and **Show** (All/Long/Short) to cut the clutter.
+- Hover a node to see all of its links, or hover a link to read `measured (real)` for both directions.
+- Each link is judged by its *worse* direction, so a node that only transmits badly can't average itself green. (#1833)
+
+## 🔗 Deep links work again
+
+Refreshing, bookmarking or pasting a link like `/devices/<id>` or `/calibration/devices/<id>` no longer gives you a blank page, including under Home Assistant ingress. (#1831)
+
+## ⚠️ Heads-up for MCP users
+
+MCP tools and resources now return exactly the same JSON as the REST API. That means **camelCase** keys (`matrix`, `rmse`, `anchored` instead of `Matrix`, `RMSE`, `Anchored`), with nulls included and `NaN` written as `"NaN"`. If you have scripts or agents that read MCP output, update the key names.
+
+On the plus side, MCP `get_calibration` now includes anchored-device rows plus best R/RMSE, just like the UI. (#1849, fixes #1836)
+
+## 🛠️ Under the hood
+
+- **Config loading is sturdier.** An invalid `config.yaml` no longer pins a CPU core or gets re-read every second. It's logged once and the last good config stays in use. Saving a setting from the UI no longer corrupts the next section of your config, and it keeps the file's permissions (it holds your MQTT password). (#1696)
+- **One calibration engine.** REST and MCP now share a single `CalibrationService`, so they can't drift apart. (#1849)
+- **Companion preview for contributors.** Point the UI dev server at any running companion with `COMPANION_URL` to try a UI branch on real data. (#1834)
+- CI: a code owner's own PRs can now merge without a second reviewer. (#1835)
+
+## 📦 Dependencies
+
+Polly 8.9.0, three.js 0.187, plus a batch of grouped UI tooling bumps (Playwright, ESLint, Vitest, OpenLayers and friends). (#1820, #1821, #1823, #1824, #1825)
+
+**Full Changelog**: https://github.com/ESPresense/ESPresense-companion/compare/v2.6.3...v2.6.4
 
 ## 2.6.3
 
