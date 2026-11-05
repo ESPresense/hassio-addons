@@ -1,3 +1,13 @@
+## 2.6.6-beta.4
+
+beta.3 with one change (branch `beta/v2.6.6-beta.4`):
+
+- **`filtering.max_velocity` defaults to 0.5 m/s again.** #1830 raised it to 1.5 (walking pace), which damps reported positions much less. This beta goes back to 0.5 while that is decided on #1830. A `max_velocity` set in `config.yaml` still wins.
+
+Everything else is as in beta.3: unmerged #1830's room and floor hold on main at 2614f3e, including #1863 (anchors pin the calibration gauge).
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.3
 
 Beta of unmerged PR #1830 on main at 2614f3e (branch `beta/v2.6.6-beta.3`). Everything in beta.2, plus:
