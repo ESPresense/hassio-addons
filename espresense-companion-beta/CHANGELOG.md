@@ -1,3 +1,14 @@
+## 2.6.6-beta.1
+
+Beta of unmerged PR #1830, rebased on main at b0552d1.
+
+- Smooth each fix once, keep up at walking pace, and start over after a gap.
+- Hold the reported floor and room until a challenger earns the switch (`room_hold`, `room_margin` 0.25 m, `floor_hold`).
+
+Robot-vacuum replay on the 2026-11-04 first-floor grid (30 dwells, against its merge-base): median error 2.49 m vs 2.62 m, right room 65% vs 64%, no-room fixes 11% vs 15%.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.5
 
 ## What’s Changed
