@@ -1,3 +1,12 @@
+## 2.6.6-beta.7
+
+Beta of unmerged PR #1865 on main at 3f1168c (branch `beta/v2.6.6-beta.7`). **#1830's room and floor hold is no longer in the BETA channel.** This beta is main plus #1865, and `filtering.max_velocity` is back to main's 0.5 default.
+
+- **`device_residual` optimizer (#1865, unmerged).** Self-calibration from located devices' own residuals, so how a node hears devices in the room finally reaches the optimizer. It learns a per-node rxAdj and trust and a per-device rssi@1m, and scores proposals on device data as well as node-to-node links (`device_weight`). It only runs with `optimization.optimizer: device_residual`; in any other mode this beta behaves like main. `optimization.device_residual.apply_device_ref` defaults to true, which writes learned rssi@1m to devices and overwrites manual values. Set it to false to calibrate nodes only.
+- **Locators solve on a fixed copy of the readings (#1867, merged)**, as in beta.5/beta.6.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.6
 
 beta.5 with #1867 as merged into main at 3f1168c (branch `beta/v2.6.6-beta.6`):
