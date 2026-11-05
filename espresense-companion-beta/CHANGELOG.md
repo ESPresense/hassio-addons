@@ -1,3 +1,13 @@
+## 2.6.6-beta.2
+
+Beta of unmerged PR #1830 merged into main at c01aae2 (branch `beta/v2.6.6-beta.2`). Everything in beta.1, plus main since then:
+
+- **Optimizer debugging over MCP and REST (#1864).** `get_optimizer_status`, `get_optimizer_last_cycle`, `get_optimizer_residuals`, `get_optimizer_measures` and `run_optimizer_dry_cycle` (and `/api/optimizer/*`). They show what the optimizer sees, what each proposal was, how it scored, and which gate refused it, with the numbers. The dry run applies nothing.
+- **One optimizer mode (#1862).** `per_node_absorption` is the only mode. The legacy chain and `global_absorption` are removed.
+- **#1830's branch since beta.1:** a replay harness over the robot-survey approach fixture (tests only).
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.1
 
 Beta of unmerged PR #1830, rebased on main at b0552d1.
