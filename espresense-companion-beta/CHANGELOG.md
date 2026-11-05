@@ -1,3 +1,13 @@
+## 2.6.6-beta.5
+
+beta.4 plus #1867 (branch `beta/v2.6.6-beta.5`):
+
+- **Locators solve on one fixed set of readings, and drop a solve a newer reading supersedes (#1867).** MQTT was updating a device's readings while its locators were solving. Solves fitted a mix of old and new readings, and some never converged (`Error finding location ...: Maximum iterations (10000) reached`, about one a minute live). Each solve now takes a copy of the readings. If a newer reading lands mid-solve, the solve stops quietly; that reading has already queued the device for its next pass. After 3 dropped solves in a row, the next one runs to the end, so a device heard by many nodes still gets a position.
+
+Everything else is as in beta.4: unmerged #1830's room and floor hold on main at 2614f3e, `max_velocity` default 0.5.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.4
 
 beta.3 with one change (branch `beta/v2.6.6-beta.4`):
