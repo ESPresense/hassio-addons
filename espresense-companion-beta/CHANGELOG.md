@@ -1,3 +1,13 @@
+## 2.6.6-beta.6
+
+beta.5 with #1867 as merged into main at 3f1168c (branch `beta/v2.6.6-beta.6`):
+
+- **#1867 as merged.** Since beta.5 it adds a lock so a solve's copy of a reading never mixes fields from two MQTT messages, and tests that drive the mid-solve abort through the real MathNet solvers. Behaviour is otherwise as in beta.5: each solve works on a fixed copy of the readings, and a solve that a newer reading supersedes is dropped quietly. A 33-minute A/B of beta.4 against beta.5 on mirrored MQTT had 47 `Maximum iterations` errors against 0, with the same positions and update counts. It's a correctness and log-noise fix, not an accuracy change.
+
+Everything else is as in beta.5: unmerged #1830's room and floor hold, `max_velocity` default 0.5.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.5
 
 beta.4 plus #1867 (branch `beta/v2.6.6-beta.5`):
