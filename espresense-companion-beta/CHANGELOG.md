@@ -1,3 +1,15 @@
+## 2.6.5
+
+## What’s Changed
+
+- ci: beta and stable release channels with one Release workflow @DTTerastar (#1855)
+- refactor: delete DeferredLoggerFactory; DeviceTracker and locators get injected loggers (#1846 follow-up) @DTTerastar (#1853)
+- refactor: tracking rules and scenario factory out of State; one enabled-locator list (#1844) @DTTerastar (#1848)
+- test(optimizers): score the position test on the solving locators @DTTerastar (#1755)
+- refactor: separate scenario fusion from MQTT publishing and history in MultiScenarioLocator @DTTerastar (#1850)
+- chore: one logging pattern and one JSON serializer per boundary (#1846) @DTTerastar (#1852)
+- refactor(mqtt): split MqttCoordinator into connection, topic router, and message handlers @DTTerastar (#1851)
+
 ## 2.6.5-beta.1
 
 ## What’s Changed
