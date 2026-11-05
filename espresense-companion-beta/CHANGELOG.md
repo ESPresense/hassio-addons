@@ -1,3 +1,11 @@
+## 2.6.6-beta.3
+
+Beta of unmerged PR #1830 on main at 2614f3e (branch `beta/v2.6.6-beta.3`). Everything in beta.2, plus:
+
+- **Anchors pin the calibration gauge (#1863).** Anchored devices keep their txRef at their own rssi@1m. The optimizer no longer fits a txRef for them or publishes `tx_ref_rssi` to a device id. Proposals are no longer scored on anchor txRefs that nothing applies. With anchors present, the "every transmitter k dB hot = every receiver k dB deaf" ambiguity is settled by the anchors, so rxAdj can't drift along it.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.2
 
 Beta of unmerged PR #1830 merged into main at c01aae2 (branch `beta/v2.6.6-beta.2`). Everything in beta.1, plus main since then:
