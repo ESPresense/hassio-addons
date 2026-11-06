@@ -23,12 +23,18 @@ jobs:
 
       - name: Get latest stable release
         id: get-version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          RELEASE_JSON=$(curl -s \
+          RELEASE_JSON=$(curl -sf \
             -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
             https://api.github.com/repos/ESPresense/ESPresense-companion/releases)
 
-          LATEST=$(echo "$RELEASE_JSON" | jq -r '[.[] | select(.prerelease == false and .draft == false)] | .[0].tag_name')
+          # The API lists releases by tag name, so v2.6.6-beta.9 sorts above
+          # v2.6.6-beta.10. Take the most recently published one instead.
+          LATEST_RELEASE=$(echo "$RELEASE_JSON" | jq -c '[.[] | select(.prerelease == false and .draft == false)] | sort_by(.published_at) | last // empty')
+          LATEST=$(echo "$LATEST_RELEASE" | jq -r '.tag_name // empty')
 
           if [[ -z "$LATEST" || "$LATEST" == "null" ]]; then
             echo "Failed to find latest stable release"
@@ -36,7 +42,7 @@ jobs:
           fi
 
           CLEAN_VERSION=$(echo "$LATEST" | sed 's/^v//')
-          RELEASE_NOTES=$(echo "$RELEASE_JSON" | jq -r "[.[] | select(.prerelease == false and .draft == false)] | .[0].body")
+          RELEASE_NOTES=$(echo "$LATEST_RELEASE" | jq -r '.body // ""')
 
           echo "version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
           # Save release notes to a file, removing "## What's Changed" line
