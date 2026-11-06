@@ -1,3 +1,13 @@
+## 2.6.6-beta.8
+
+Beta of unmerged PR #1865 (at 7543b46) on main at 3f1168c (branch `beta/v2.6.6-beta.8`). beta.7 plus one fix to how `device_residual` scores proposals.
+
+- **Held-out device windows are scored with each device's learned rssi@1m (#1865, unmerged).** In beta.7 they were ranged with the rssi@1m they were received with. With `apply_device_ref: false`, or for any device whose learned value never gets written, those can be several dB wrong. The device term then mostly measured that error, which no node proposal can fix. Now the baseline and every proposal are scored with the same learned values, so the term judges node calibration. In the optimizer's last-cycle report, `deviceWindows.evalRangedWithLearned` says how many held-out windows used a learned value.
+- **Expect a lower held-out device residual and a solver scale near 1** in `get_optimizer_last_cycle`. The device-facing gains it reports are also smaller and more honest. A fix to one node shows only in the held-out snapshots where devices were near that node, so after the first step the every-snapshot gate can still refuse the rest, whatever `device_weight` is.
+- Otherwise as beta.7: `device_residual` only runs with `optimization.optimizer: device_residual`. `optimization.device_residual.apply_device_ref` defaults to true, which overwrites manual device rssi@1m.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.7
 
 Beta of unmerged PR #1865 on main at 3f1168c (branch `beta/v2.6.6-beta.7`). **#1830's room and floor hold is no longer in the BETA channel.** This beta is main plus #1865, and `filtering.max_velocity` is back to main's 0.5 default.
