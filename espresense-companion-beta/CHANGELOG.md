@@ -1,3 +1,15 @@
+## 2.6.7-beta.1
+
+Beta of unmerged PRs #1865 (at 1bde2c9) and #1753 (at 4ec7831) on main at c544389 = v2.6.6 (branch `beta/v2.6.7-beta.1`).
+
+The code is the same as v2.6.6-beta.11. It's republished on the new version line now that v2.6.6 is stable, with both PRs at their current heads (#1753 was rebased; the only change since beta.11 is a test). The beta.11 tree also carried a stray `.pnpm-store`, and this one doesn't.
+
+- **`device_residual` optimizer (#1865, unmerged).** Self-calibration from located devices' own residuals: a per-node rxAdj and trust and a per-device rssi@1m, with proposals scored on device data as well as node-to-node links (`device_weight`). It only runs with `optimization.optimizer: device_residual`. `optimization.device_residual.apply_device_ref` defaults to true, which overwrites manual device rssi@1m.
+- **Fingerprint locator, robot survey and accuracy ruler (#1753, unmerged).** `locators.fingerprint` matches each node's raw rssi against a kernel-regressed survey surface instead of ranging; with `priority` (default on), a fingerprint fix above `min_confidence` is reported over ranging wherever the survey covers the device. Opt-ins: `fingerprint.tracker`, `fingerprint.prior`, `survey.robot`, `accuracy`, and room learning from HA corrections.
+- **Readings from unplaced receivers are recorded (#1753).** They're fingerprint features; ranging locators leave them out.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6
 
 ## What’s Changed
