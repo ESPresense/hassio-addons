@@ -1,3 +1,15 @@
+## 2.6.6
+
+## What’s Changed
+
+- fix(optimizer): anchored-device measures use stationary receivers only @DTTerastar (#1870)
+- fix(calibration): leave receivers that move out of anchored-device rows @DTTerastar (#1873)
+- fix(optimizer): skip non-stationary nodes when reading measures @DTTerastar (#1871)
+- fix(locators): solve on a snapshot of the readings; drop a solve a newer reading supersedes @DTTerastar (#1867)
+- fix(optimizer): hold anchored devices' txRef at rssi@1m so anchors pin the gauge @DTTerastar (#1863)
+- refactor(optimizers): remove the legacy chain and global\_absorption; per\_node\_absorption is the only mode @DTTerastar (#1862)
+- feat(mcp): optimizer debugging tools (status, last cycle, residuals, measures, dry run) @DTTerastar (#1864)
+
 ## 2.6.6-beta.9
 
 Beta of unmerged PRs #1865 (at 1bde2c9) and #1870 on main at 3f1168c (branch `beta/v2.6.6-beta.9`). beta.8 plus two fixes so that nodes that move stay out of calibration.
