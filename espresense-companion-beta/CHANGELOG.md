@@ -1,3 +1,13 @@
+## 2.6.6-beta.9
+
+Beta of unmerged PRs #1865 (at 1bde2c9) and #1870 on main at 3f1168c (branch `beta/v2.6.6-beta.9`). beta.8 plus two fixes so that nodes that move stay out of calibration.
+
+- **Device residuals use stationary nodes only (#1865, unmerged).** A node with `stationary: false` (a car, a node carried around) can have a point configured, but that point is only where it sometimes is. beta.8 still used its readings of devices, and placed it at that point, so whenever it was elsewhere every distance to it was wrong and the optimizer proposed an rxAdj for it. Node-to-node links already left such nodes out; device residuals now do too, including windows already collected.
+- **Anchored-device measures use stationary receivers only (#1870, unmerged).** The same problem in the measures `per_node_absorption` fits: an anchored device was paired with every node that heard it and has a point, so the optimizer proposed absorption and rxAdj for a node that moves. This affects `per_node_absorption` as well as `device_residual`.
+- Otherwise as beta.8. Held-out device windows are scored with each device's learned rssi@1m. `device_residual` only runs with `optimization.optimizer: device_residual`. `optimization.device_residual.apply_device_ref` defaults to true, which overwrites manual device rssi@1m.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.6-beta.8
 
 Beta of unmerged PR #1865 (at 7543b46) on main at 3f1168c (branch `beta/v2.6.6-beta.8`). beta.7 plus one fix to how `device_residual` scores proposals.
