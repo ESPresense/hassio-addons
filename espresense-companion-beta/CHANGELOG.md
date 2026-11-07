@@ -1,3 +1,13 @@
+## 2.6.7-beta.2
+
+Beta of unmerged PRs #1881, #1865 (at 6a8f37d) and #1753 (at 4ec7831, as in beta.1) on main at c544389 = v2.6.6 (branch `beta/v2.6.7-beta.2`). beta.1 plus two optimizer fixes.
+
+- **The per-node optimizer no longer lets steady links dominate (#1881, unmerged).** It weighted each link by 1 / rssiVar, and nodes report rssiVar from under 0.1 to over 500 dB², so a few steady links carried a third of the fit. A steady reading isn't an unbiased one, and replaying a house showed the resulting fits were worse than the calibration they would replace: the gate refused them every cycle. Each link's weight now includes its own error (16 dB²) as well as its reported variance. On the same replay the gate accepts the fit, and anchored devices located with multi_floor land about 1 m closer (2.5 → 1.5 m median). This affects `per_node_absorption`, the default mode.
+- **device_residual's device term only applies in that mode (#1865, unmerged).** After switching from `device_residual` to another mode, older snapshots still carried device windows and kept scoring proposals with `device_weight` until they aged out.
+- Otherwise as beta.1: the fingerprint locator (#1753) and the optional `device_residual` optimizer (#1865).
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.7-beta.1
 
 Beta of unmerged PRs #1865 (at 1bde2c9) and #1753 (at 4ec7831) on main at c544389 = v2.6.6 (branch `beta/v2.6.7-beta.1`).
