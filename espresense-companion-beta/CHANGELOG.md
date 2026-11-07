@@ -1,3 +1,13 @@
+## 2.6.8-beta.1
+
+v2.6.7 plus #1882, unmerged (branch `beta/v2.6.8-beta.1`).
+
+- **Device calibration page layout (#1882).** Floor and height controls share one compact card instead of two full-width rows; the floor dropdown has a fixed width; the no-op "Set" button next to the height input is gone (the input is already bound); the page is capped at a readable width and centered.
+
+Nothing else changes: the optimizer and locators are exactly v2.6.7. The fingerprint locator (#1753) and spot judge (#1877-#1880) from the v2.6.7 betas are not in this build.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.7
 
 ## What’s Changed
