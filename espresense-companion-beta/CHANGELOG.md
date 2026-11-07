@@ -1,3 +1,10 @@
+## 2.6.8
+
+## What’s Changed
+
+- fix(ui): tidy device calibration controls layout @DTTerastar (#1882)
+- fix(ui): calibration page console noise: capture status 204 when idle @DTTerastar (#1883)
+
 ## 2.6.8-beta.3
 
 Main @ 732fd0b: v2.6.7 plus the two merged calibration-page PRs, #1882 and #1883. Nothing else changes; the optimizer and locators are exactly v2.6.7.
