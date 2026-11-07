@@ -1,3 +1,18 @@
+## 2.6.7-beta.3
+
+beta.2 plus the spot judge stack, all unmerged (branch `beta/v2.6.7-beta.3`): #1877, #1878, #1879 and #1880, on top of #1881, #1865 and #1753 as in beta.2.
+
+**Opt-in:** with no config change the optimizer decides exactly as in beta.2. It only adds a report.
+
+- **Spot score (#1877, report-only).** Every cycle also scores the current calibration and each proposal on devices at known positions: anchors and taught locations. Each spot's level is fitted, so a device's rssi@1m guess doesn't count. See `baselineSpots` and `spots` in `get_optimizer_last_cycle`.
+- **`optimization.judge: spots` (#1878).** Proposals are accepted on those spots instead of on node-to-node links. A proposal must be better on the spots consistently (sign test z ≥ 2) and gain at least 0.1 dB. It must not make node-to-node links more than 1 dB worse, and must not move the mean rxAdj more than 2 dB. With fewer than 4 spots the calibration is held.
+- **Taught spots (#1879).** The same `fingerprints.json` the fingerprint locator uses: samples averaged per 0.25 m cell, counting only receivers that serve the spot's floor.
+- **Spot Fit (#1880).** Under `judge: spots`, an optimizer that fits rxAdj and absorption on two thirds of the taught spots and is judged on the other third. Each cycle moves rxAdj by at most 3 dB and absorption by at most 0.2. The mean rxAdj is held where it was.
+
+In a mirrored soak on one install, Spot Fit applied one step that held-out spots confirmed (spot RMS 4.79 → 4.56 dB), then held.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.7-beta.2
 
 Beta of unmerged PRs #1881, #1865 (at 6a8f37d) and #1753 (at 4ec7831, as in beta.1) on main at c544389 = v2.6.6 (branch `beta/v2.6.7-beta.2`). beta.1 plus two optimizer fixes.
