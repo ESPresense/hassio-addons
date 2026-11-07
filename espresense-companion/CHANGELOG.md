@@ -1,3 +1,11 @@
+## 2.6.7
+
+## What’s Changed
+
+- fix(optimizer): add each link's own error to its weight in the per-node fit @DTTerastar (#1881)
+- Bump ModelContextProtocol.AspNetCore from 2.3.0 to 2.3.1 @[dependabot[bot]](https://github.com/apps/dependabot) (#1875)
+- build(deps-dev): bump the npm-minor-and-patch group in /src/ui with 12 updates @[dependabot[bot]](https://github.com/apps/dependabot) (#1876)
+
 ## 2.6.6
 
 ## What’s Changed
