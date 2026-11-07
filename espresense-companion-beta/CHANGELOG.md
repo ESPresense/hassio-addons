@@ -1,3 +1,16 @@
+## 2.6.8-beta.2
+
+beta.1 plus the rest of the device calibration page work, all unmerged (branch `beta/v2.6.8-beta.2`): #1882 updated, and #1883.
+
+- **Floor and height controls on one row (#1882).** In the narrow left column of the calibration page the height field was wrapping under the floor select; the card is now a two-column grid where the select shrinks to fit and the height field keeps a fixed width.
+- **No more capture 404s in the console (#1883).** The page polls the device's capture status every second; the endpoint answers 204 instead of 404 when nothing is being captured, so the browser stops logging a line per second.
+- **The UI reloads itself on a new build (#1883).** The layout used to swap to a new build only on the next in-app navigation, so a calibration page left open kept running the old bundle after an add-on update. It now reloads as soon as the 5 s version poll sees a newer build.
+
+Nothing else changes: the optimizer and locators are exactly v2.6.7.
+
+Changes since v2.6.8-beta.1.
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.8-beta.1
 
 v2.6.7 plus #1882, unmerged (branch `beta/v2.6.8-beta.1`).
