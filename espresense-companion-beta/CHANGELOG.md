@@ -1,3 +1,14 @@
+## 2.6.8-beta.3
+
+Main @ 732fd0b: v2.6.7 plus the two merged calibration-page PRs, #1882 and #1883. Nothing else changes; the optimizer and locators are exactly v2.6.7.
+
+- **Device calibration page (#1882).** Floor and height controls on one row, custom dropdown chevron, and device markers no longer log NaN SVG text coordinates when a device loses its location.
+- **Capture status 204 when idle (#1883).** No more per-second 404s in the console.
+
+Built by hand from main: beta.2 carried unsquashed copies of these PRs, so the Release workflow would refuse a beta from main. Changes since v2.6.8-beta.2: the merged form of #1883 does not include beta.2's auto-reload-on-new-build effect.
+
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.8-beta.2
 
 beta.1 plus the rest of the device calibration page work, all unmerged (branch `beta/v2.6.8-beta.2`): #1882 updated, and #1883.
