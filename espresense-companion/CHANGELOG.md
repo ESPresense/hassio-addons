@@ -1,3 +1,10 @@
+## 2.6.8
+
+## What’s Changed
+
+- fix(ui): tidy device calibration controls layout @DTTerastar (#1882)
+- fix(ui): calibration page console noise: capture status 204 when idle @DTTerastar (#1883)
+
 ## 2.6.7
 
 ## What’s Changed
