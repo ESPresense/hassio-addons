@@ -1,3 +1,31 @@
+## 2.6.9-beta.2
+
+v2.6.9-beta.1 plus main: the history view (#1887). The spot judge stack (#1877, #1878, #1879, #1880) is still unmerged and unchanged from beta.1 (branch `beta/v2.6.9-beta.2`).
+
+## What’s Changed
+
+- feat(ui): history playback on the device page: scrub, replay and trail a device's past positions (#1826) @DTTerastar (#1887)
+
+  The device page gets a bar under the map: a time slider over the retained window, play/pause at 1x, 10x or 60x, and a trail of the last 5, 15 or 60 minutes of fixes coloured by room and faded by age. Scrubbing shows a ghost at the stored position with its time, the room and floor at that moment, and the map follows the fix's floor. Needs `history.enabled: true`; the bar says so otherwise. History timestamps now come back as UTC (they were read back without a zone, so browsers took them as local time), and `/api/history/{id}/range` takes `best=true` and `every=<seconds>` to thin a day of fixes.
+
+## Carried from v2.6.9-beta.1
+
+v2.6.8 plus the spot judge stack, all unmerged (branch `beta/v2.6.9-beta.1`): #1877, #1878, #1879 and #1880. Everything in v2.6.8 is unchanged.
+
+**Opt-in:** without `optimization.judge: spots` the optimizer decides exactly as in v2.6.8. It only adds a report.
+
+- **Spot score (#1877, report-only).** Every cycle also scores the current calibration and each proposal on devices at known positions: anchors and taught locations. Each spot's level is fitted, so a device's rssi@1m guess doesn't count.
+- **`optimization.judge: spots` (#1878).** Proposals are accepted on those spots instead of on node-to-node links. A proposal must be better on the spots consistently (sign test z ≥ 2) and gain at least 0.1 dB. It must not make node-to-node links more than 1 dB worse, and must not move the mean rxAdj more than 2 dB. With fewer than 4 spots the calibration is held. The outcome cites the spot evidence that accepted the change.
+- **Taught spots (#1879).** Read from `fingerprints.json` beside `config.yaml`: samples averaged per 0.25 m cell, counting only receivers that serve the spot's floor.
+- **Spot Fit (#1880).** Under `judge: spots`, an optimizer that fits rxAdj and absorption on two thirds of the taught spots and is judged on the other third. Each cycle moves rxAdj by at most 3 dB and absorption by at most 0.2. The mean rxAdj is held where it was.
+
+On v2.6.7-beta.3, the first live cycle with `judge: spots` applied Spot Fit to 8 nodes: better on 29 of 42 held-out spots, spot RMS 4.21 → 4.04 dB. It then held for every following cycle.
+
+
+
+Changes since v2.6.9-beta.1.
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.9-beta.1
 
 v2.6.8 plus the spot judge stack, all unmerged (branch `beta/v2.6.9-beta.1`): #1877, #1878, #1879 and #1880. Everything in v2.6.8 is unchanged.
