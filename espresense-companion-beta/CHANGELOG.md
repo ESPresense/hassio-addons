@@ -1,3 +1,36 @@
+## 2.6.9-beta.3
+
+main @ 7648561. **Drops the unmerged optimizer stack (#1878, #1879, #1880) that v2.6.9-beta.1 and beta.2 carried**, so this beta is published by hand: release.sh refuses a beta that doesn't contain the previous one. #1877 is in, merged as the anchor fit (below).
+
+**If you set `optimization.judge: spots` on an earlier beta:** that setting no longer exists. The optimizer judges proposals on node-to-node links again, as in v2.6.8.
+
+**Anchor fit (#1877, report-only).** Every optimizer cycle also reports how well the current calibration and each proposal fit your anchors: how much the nodes disagree about each anchor's signal level, in dB, with the anchor's rssi@1m not used. It's on the calibration page under Auto Optimization ("Fit to anchors"), in `/api/optimizer/last-cycle`, and in the MCP tool `get_optimizer_last_cycle`. No gate reads it.
+
+## What’s Changed
+
+- feat(optimizer): report how well each calibration fits the anchors (#1868) @DTTerastar (#1877)
+- feat(ui): 3D view: select a device to see its ranges; double-click to open it (#1891) @DTTerastar (#1907)
+- Bump Microsoft.AspNetCore.SpaProxy from 8.0.33 to 8.0.34 @[dependabot[bot]](https://github.com/apps/dependabot) (#1899)
+- feat(config): map.wall\_opacity\_top for the 3D walls, and say that map.wall\_\* drive the 3D view @DTTerastar (#1905)
+- feat(ui): 3D view node markers: a puck with the logo on top, on a mast (#1890) @DTTerastar (#1906)
+- build(deps-dev): bump the npm-minor-and-patch group across 1 directory with 13 updates @[dependabot[bot]](https://github.com/apps/dependabot) (#1903)
+- refactor(mqtt): parse inbound MQTT with JsonDefaults.MqttRead, not Newtonsoft (#1854) @DTTerastar (#1856)
+- Bump Polly from 8.9.0 to 8.9.1 @[dependabot[bot]](https://github.com/apps/dependabot) (#1901)
+- Bump ModelContextProtocol.AspNetCore from 2.3.1 to 2.4.0 @[dependabot[bot]](https://github.com/apps/dependabot) (#1900)
+- build(deps-dev): bump jsdom from 30.1.3 to 31.0.0 in /src/ui @[dependabot[bot]](https://github.com/apps/dependabot) (#1904)
+- feat(ui): 3D walls fade out towards the ceiling, with a line along the top @DTTerastar (#1898)
+- feat(ui): 3D view lighting: hemisphere light, fitted sun shadow, filmic tone mapping and fog (#1889) @DTTerastar (#1896)
+- feat(ui): 3D view draws real cut-away walls from wall\_thickness / wall\_color / wall\_opacity (#1888) @DTTerastar (#1895)
+- fix(optimizer): auto-optimize toggle replaces a removed optimizer mode instead of writing it back @DTTerastar (#1866)
+- fix(ui): encode device and node IDs in API and navigation URLs @DTTerastar (#1894)
+- feat(ui): link a device's map page and its calibration Details panel (#1809) @DTTerastar (#1884)
+- feat(ui): make the 3D view readable: floor tabs, framed camera, label diet, drop lines @DTTerastar (#1886)
+- feat(ui): history playback on the device page: scrub, replay and trail a device's past positions (#1826) @DTTerastar (#1887)
+
+
+Changes since v2.6.8.
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.9-beta.2
 
 v2.6.9-beta.1 plus main: the history view (#1887). The spot judge stack (#1877, #1878, #1879, #1880) is still unmerged and unchanged from beta.1 (branch `beta/v2.6.9-beta.2`).
