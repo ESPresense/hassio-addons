@@ -1,3 +1,13 @@
+## 2.6.9-beta.4
+
+## What’s Changed
+
+- fix: serve index.html and version.json with no-cache so an update never boots the previous build @DTTerastar (#1909)
+
+
+Changes since v2.6.9-beta.3.
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.9-beta.3
 
 main @ 7648561. **Drops the unmerged optimizer stack (#1878, #1879, #1880) that v2.6.9-beta.1 and beta.2 carried**, so this beta is published by hand: release.sh refuses a beta that doesn't contain the previous one. #1877 is in, merged as the anchor fit (below).
