@@ -1,0 +1,124 @@
+name: Update ESPresense Companion Alpha
+
+# The alpha add-on runs one unmerged ESPresense-companion pull request: the one
+# labelled `alpha` there. That repo's Alpha workflow dispatches `update-alpha`
+# with the PR number and the image tag its PR build pushed (pr-<number>-<sha7>).
+# Nothing here runs on a schedule: the add-on only moves when a PR is labelled
+# or a labelled PR gets a new commit.
+on:
+  repository_dispatch:
+    types: [update-alpha]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Image tag to point the alpha add-on at (pr-<number>-<sha7>, or a release version to park it)
+        required: true
+        type: string
+      pr:
+        description: Pull request number, when the tag is a PR build
+        required: false
+        type: string
+
+concurrency:
+  group: update-alpha
+  cancel-in-progress: false
+
+jobs:
+  update-alpha:
+    runs-on: ubuntu-latest
+    env:
+      NEW_VERSION: ${{ github.event.client_payload.version || inputs.version }}
+      PR: ${{ github.event.client_payload.pr || inputs.pr }}
+    steps:
+      - name: Check the requested tag
+        run: |
+          # A PR build, or a release version (to park the add-on on a beta or stable).
+          if [[ ! "$NEW_VERSION" =~ ^(pr-[0-9]+-[0-9a-f]{7}|[0-9]+\.[0-9]+\.[0-9]+(-beta\.[0-9]+)?)$ ]]; then
+            echo "Refusing tag '$NEW_VERSION'" >&2
+            exit 1
+          fi
+          if [[ -n "$PR" && ! "$PR" =~ ^[0-9]+$ ]]; then
+            echo "Refusing PR '$PR'" >&2
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install yq
+        run: sudo snap install yq
+
+      - name: Test alpha container
+        run: |
+          docker pull "espresense/espresense-companion:$NEW_VERSION"
+          docker run -d --name mqtt-alpha-test -p 1883:1883 eclipse-mosquitto:latest
+
+          mkdir -p test-config/espresense
+          cat > test-config/espresense/config.yaml <<EOF
+          mqtt:
+            host: localhost
+            port: 1883
+          EOF
+
+          docker run -d --name esp-alpha-test \
+            --network host \
+            -v "$(pwd)/test-config:/config" \
+            "espresense/espresense-companion:$NEW_VERSION"
+
+          ok=0
+          for i in $(seq 1 12); do
+            sleep 5
+            if ! docker ps --format '{{.Names}}' | grep -qx esp-alpha-test; then
+              echo "Container exited" >&2
+              break
+            fi
+            if curl --fail --silent http://localhost:8267 >/dev/null; then
+              ok=1
+              break
+            fi
+          done
+
+          if [[ "$ok" != 1 ]]; then
+            docker logs esp-alpha-test || true
+          fi
+          docker rm -f esp-alpha-test mqtt-alpha-test >/dev/null 2>&1 || true
+          sudo rm -rf test-config
+          [[ "$ok" == 1 ]] && echo "Alpha web UI responded"
+          [[ "$ok" == 1 ]]
+
+      - name: Update config.yaml and changelog (alpha)
+        run: |
+          cd espresense-companion-alpha
+          CURRENT=$(yq '.version' config.yaml)
+          if [[ "$CURRENT" == "$NEW_VERSION" ]]; then
+            echo "Alpha already on $NEW_VERSION"
+            exit 0
+          fi
+          echo "Updating alpha from $CURRENT to $NEW_VERSION"
+          yq -i ".version = \"$NEW_VERSION\"" config.yaml
+
+          {
+            echo "## $NEW_VERSION"
+            echo ""
+            if [[ -n "$PR" ]]; then
+              echo "Build of [ESPresense-companion #$PR](https://github.com/ESPresense/ESPresense-companion/pull/$PR), unmerged. See the pull request for what it changes."
+            else
+              echo "Parked on release $NEW_VERSION: no pull request is being alpha tested."
+            fi
+            echo ""
+            cat CHANGELOG.md
+          } > CHANGELOG.md.tmp
+          mv CHANGELOG.md.tmp CHANGELOG.md
+
+      - name: Commit and push alpha changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "actions@github.com"
+          git add espresense-companion-alpha/config.yaml espresense-companion-alpha/CHANGELOG.md
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "chore: update alpha to $NEW_VERSION"
+          git pull --rebase origin main
+          git push

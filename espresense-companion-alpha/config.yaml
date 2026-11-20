@@ -1,0 +1,29 @@
+name: ESPresense Companion - ALPHA
+version: 2.6.9-beta.4
+slug: espresense-companion-alpha
+description: (ALPHA) One unmerged pull request of ESPresense Companion, for testing. Expect breakage; use the BETA or stable add-on otherwise
+url: https://espresense.com/companion
+stage: experimental
+image: espresense/espresense-companion
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+map:
+  - config:rw
+host_network: true
+ingress: true
+ingress_port: 8267
+ingress_stream: true
+panel_icon: mdi:alpha-e-circle
+panel_title: ESPresense
+homeassistant_api: true
+services:
+  - mqtt:want
+ports:
+  8267/tcp: null
+  8268/tcp: null
+ports_description:
+  8267/tcp: UI
+  8268/tcp: Firmware Updates
