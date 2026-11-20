@@ -23,12 +23,15 @@ concurrency:
   group: update-alpha
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   update-alpha:
     runs-on: ubuntu-latest
     env:
       NEW_VERSION: ${{ github.event.client_payload.version || inputs.version }}
-      PR: ${{ github.event.client_payload.pr || inputs.pr }}
+      GIVEN_PR: ${{ github.event.client_payload.pr || inputs.pr }}
     steps:
       - name: Check the requested tag
         run: |
@@ -37,13 +40,22 @@ jobs:
             echo "Refusing tag '$NEW_VERSION'" >&2
             exit 1
           fi
-          if [[ -n "$PR" && ! "$PR" =~ ^[0-9]+$ ]]; then
-            echo "Refusing PR '$PR'" >&2
+          # The PR number comes from the tag itself, so the changelog can't link the wrong PR.
+          PR=""
+          if [[ "$NEW_VERSION" =~ ^pr-([0-9]+)- ]]; then
+            PR="${BASH_REMATCH[1]}"
+          fi
+          if [[ -n "$GIVEN_PR" && "$GIVEN_PR" != "$PR" ]]; then
+            echo "PR '$GIVEN_PR' does not match tag '$NEW_VERSION'" >&2
             exit 1
           fi
+          echo "PR=$PR" >> "$GITHUB_ENV"
 
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          # Runs queue one behind another; each has to start from what the last one pushed.
+          ref: main
 
       - name: Install yq
         run: sudo snap install yq
@@ -72,7 +84,7 @@ jobs:
               echo "Container exited" >&2
               break
             fi
-            if curl --fail --silent http://localhost:8267 >/dev/null; then
+            if curl --fail --silent --max-time 5 http://localhost:8267 >/dev/null; then
               ok=1
               break
             fi

@@ -9,7 +9,8 @@ from one PR to a different one between updates. Use the BETA or stable add-on un
 to try a specific PR.
 
 It uses the same ports and the same `/config/espresense` folder as the other two add-ons, so stop
-the one you normally run before starting this one. A PR that changes stored data can leave that
+the one you normally run before starting this one. Also turn off **Start on boot** on the one
+you stopped, or both will try to start after a reboot; turn it back on when you go back. A PR that changes stored data can leave that
 data in a state the older add-on doesn't expect; back up `/config/espresense` first if that matters.
 
 See https://espresense.com/companion
