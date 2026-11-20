@@ -1,3 +1,17 @@
+## 2.6.9-beta.5
+
+**Auto-optimize judges proposals differently (#1869).** The optimizer's RMSE is now the ranging error in metres (the distance each link's signal implies, against the distance on your map), not the signal error in dB. It will accept more proposals than before, so expect node calibration (rxAdj, absorption, txRef) to move after updating. The RMSE in `/api/optimizer/last-cycle` and the logs is in metres too. If locating gets worse, turn auto-optimize off and say so in #1868.
+
+## What’s Changed
+
+- feat(optimizer): score proposals by ranging error in metres, not RSSI error in dB (#1868) @DTTerastar (#1869)
+- ci: alpha label (or scripts/alpha) runs a PR's image on a Home Assistant install @DTTerastar (#1912)
+- fix(capture): make capture session stop, append and export atomic (#1841) @DTTerastar (#1910)
+
+
+Changes since v2.6.9-beta.4.
+Pre-release: install the **ESPresense Companion - BETA** add-on, or run `espresense/espresense-companion:beta`.
+
 ## 2.6.9-beta.4
 
 ## What’s Changed
